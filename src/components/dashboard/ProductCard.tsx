@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useRef } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { ProductVariation, ProductWithVariations } from "@/lib/types/database";
 import { productService } from "@/lib/productService";
@@ -21,6 +21,16 @@ const ProductCard: FC<ProductCardProps> = ({ id, name, description, image_url, b
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(true);
     const [added, setAdded] = useState(false);
+    const addedTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+    // Cleanup timeout on unmount to avoid state updates on unmounted component
+    useEffect(() => {
+        return () => {
+            if (addedTimeoutRef.current) {
+                clearTimeout(addedTimeoutRef.current);
+            }
+        };
+    }, []);
 
     // Fetch variations for this product
     useEffect(() => {
@@ -73,8 +83,13 @@ const ProductCard: FC<ProductCardProps> = ({ id, name, description, image_url, b
         addToCart(product, variationToUse, quantity);
         setAdded(true);
 
+        // Clear any existing timeout before setting a new one
+        if (addedTimeoutRef.current) {
+            clearTimeout(addedTimeoutRef.current);
+        }
+
         // Show feedback briefly then open cart
-        setTimeout(() => {
+        addedTimeoutRef.current = setTimeout(() => {
             setAdded(false);
             setIsCartOpen(true);
         }, 500);

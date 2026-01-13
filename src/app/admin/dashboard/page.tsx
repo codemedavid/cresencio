@@ -155,6 +155,8 @@ export default function AdminDashboard() {
                 await fetchUsers();
             } else if (activeTab === "products") {
                 await fetchProducts();
+            } else if (activeTab === "payments") {
+                await fetchPaymentMethods();
             } else if (activeTab === "settings") {
                 await fetchSettings();
             }
