@@ -38,7 +38,7 @@ export default async function MyOrdersPage() {
                 <div className="bg-white border-4 border-black p-12 text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
                     <Package className="w-16 h-16 mx-auto mb-4 text-gray-400" />
                     <h3 className="text-xl font-bold uppercase mb-2">No orders found</h3>
-                    <p className="text-gray-600 mb-6">You haven't placed any orders yet.</p>
+                    <p className="text-gray-600 mb-6">You haven&apos;t placed any orders yet.</p>
                     <Link
                         href="/dashboard/order"
                         className="inline-block px-6 py-3 bg-[var(--color-brand-magenta)] text-white font-bold uppercase border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all"

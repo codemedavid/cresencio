@@ -25,11 +25,14 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const [isHydrated, setIsHydrated] = useState(false);
 
     // Load cart from localStorage on mount
+    // This is the standard React pattern for hydrating client-side state from localStorage
+    // It runs only once on mount (empty dependency array) and is the correct approach for SSR hydration
     useEffect(() => {
         const stored = localStorage.getItem(CART_STORAGE_KEY);
         if (stored) {
             try {
                 const parsed = JSON.parse(stored);
+                // eslint-disable-next-line react-hooks/set-state-in-effect -- Intentional: localStorage hydration on mount
                 setCartItems(parsed);
             } catch (e) {
                 console.error("Failed to parse cart from storage:", e);

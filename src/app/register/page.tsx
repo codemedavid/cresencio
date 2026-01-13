@@ -109,7 +109,7 @@ export default function RegisterPage() {
                 const result = await updateVipProfile({
                     userId: authData.user.id,
                     idProofUrl: publicUrl,
-                    idType: formData.idType as any,
+                    idType: formData.idType as 'student' | 'pwd' | 'senior',
                 });
 
                 if (!result.success) {
@@ -132,9 +132,9 @@ export default function RegisterPage() {
                 router.push('/login');
             }, 2000);
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Registration Error:', err);
-            setError(err.message || 'An unexpected error occurred.');
+            setError(err instanceof Error ? err.message : 'An unexpected error occurred.');
         } finally {
             setLoading(false);
         }

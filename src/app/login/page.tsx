@@ -56,9 +56,9 @@ export default function LoginPage() {
             }
             router.refresh();
 
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error('Login error:', err);
-            setError(err.message || 'Invalid email or password');
+            setError(err instanceof Error ? err.message : 'Invalid email or password');
         } finally {
             setLoading(false);
         }
@@ -135,7 +135,7 @@ export default function LoginPage() {
                         </button>
 
                         <div className="text-center font-bold text-sm mt-6">
-                            Don't have an account?{' '}
+                            Don&apos;t have an account?{' '}
                             <Link href="/register" className="text-[var(--color-brand-magenta)] hover:underline decoration-2">
                                 Join the Club
                             </Link>

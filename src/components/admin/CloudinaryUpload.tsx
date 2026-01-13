@@ -62,9 +62,9 @@ export default function CloudinaryUpload({ onUpload, defaultImage, label = "Prod
 
             const data = await response.json();
             onUpload(data.secure_url);
-        } catch (err: any) {
+        } catch (err: unknown) {
             console.error("Upload error:", err);
-            setError(err.message || "Failed to upload image");
+            setError(err instanceof Error ? err.message : "Failed to upload image");
             // Revert preview only if we really want to enforce strict sync, 
             // but keeping local preview until they try again might be better UX?
             // For now, let's keep the local preview but show error.

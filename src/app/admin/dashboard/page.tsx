@@ -7,8 +7,6 @@ import {
     ShoppingBag,
     CheckCircle2,
     XCircle,
-    Clock,
-    Search,
     Filter,
     Package,
     Plus,
@@ -190,7 +188,7 @@ export default function AdminDashboard() {
             } else {
                 setSettingsMessage({ type: 'error', text: result.error || 'Failed to save settings' });
             }
-        } catch (error) {
+        } catch (_error) {
             setSettingsMessage({ type: 'error', text: 'An unexpected error occurred' });
         } finally {
             setSavingSettings(false);

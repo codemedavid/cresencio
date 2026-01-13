@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import { createOrderService, IOrderService, SupabaseClientLike } from '../orderService.core';
 import { Order, OrderWithDetails } from '@/lib/types/database';
 

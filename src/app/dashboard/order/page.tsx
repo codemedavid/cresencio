@@ -614,7 +614,7 @@ function OrderForm() {
             <div className="max-w-2xl mx-auto">
                 <div className="bg-[#a3e635] border-4 border-black p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] text-center">
                     <h2 className="text-4xl font-extrabold uppercase mb-4">Order Submitted!</h2>
-                    <p className="font-bold text-lg mb-4">We'll get back to you shortly with a quote and preview.</p>
+                    <p className="font-bold text-lg mb-4">We&apos;ll get back to you shortly with a quote and preview.</p>
 
                     {/* Messenger CTA */}
                     <div className="bg-white border-2 border-black p-4 mb-6">

@@ -83,11 +83,11 @@ export default function ProductModal({ isOpen, onClose, onSave, productToEdit }:
         ]);
     };
 
-    const handleVariationChange = (index: number, field: keyof ProductVariation, value: any) => {
+    const handleVariationChange = (index: number, field: keyof ProductVariation, value: string | number) => {
         const updatedVariations = [...variations];
         updatedVariations[index] = {
             ...updatedVariations[index],
-            [field]: field === "price_modifier" ? parseFloat(value) : value,
+            [field]: field === "price_modifier" ? parseFloat(String(value)) : value,
         };
         setVariations(updatedVariations);
     };

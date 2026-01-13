@@ -1,7 +1,7 @@
 'use server';
 
 import { createClient } from '@/lib/supabase/server';
-import { createOrderService } from '@/lib/orderService';
+import { createOrderService, SupabaseClientLike } from '@/lib/orderService';
 import { revalidatePath } from 'next/cache';
 import { OrderStatus } from '@/lib/types/database';
 import { sendOrderNotificationEmail, OrderEmailData, sendOrderCompletedEmail, OrderCompletionEmailData } from '@/lib/emailService';
@@ -9,7 +9,7 @@ import { getNotificationEmailAction } from './settings';
 
 export async function createOrderAction(formData: FormData) {
     const supabase = await createClient();
-    const orderService = createOrderService(supabase);
+    const orderService = createOrderService(supabase as unknown as SupabaseClientLike);
 
     // Get current user
     const { data: { user } } = await supabase.auth.getUser();
@@ -68,7 +68,7 @@ export async function createOrderAction(formData: FormData) {
                 .single();
 
             productName = product?.name ?? null;
-            let basePrice = product?.base_price ?? 0;
+            const basePrice = product?.base_price ?? 0;
             let priceModifier = 0;
 
             // If there's a variation, get its price modifier and name
@@ -160,7 +160,7 @@ export async function createOrderAction(formData: FormData) {
 
 export async function getMyOrdersAction() {
     const supabase = await createClient();
-    const orderService = createOrderService(supabase);
+    const orderService = createOrderService(supabase as unknown as SupabaseClientLike);
 
     const { data: { user } } = await supabase.auth.getUser();
 
@@ -178,7 +178,7 @@ export async function getMyOrdersAction() {
 
 export async function getAllOrdersAction() {
     const supabase = await createClient();
-    const orderService = createOrderService(supabase);
+    const orderService = createOrderService(supabase as unknown as SupabaseClientLike);
 
     // Check admin role
     const { data: { user } } = await supabase.auth.getUser();
@@ -205,7 +205,7 @@ export async function getAllOrdersAction() {
 
 export async function updateOrderStatusAction(orderId: string, status: OrderStatus) {
     const supabase = await createClient();
-    const orderService = createOrderService(supabase);
+    const orderService = createOrderService(supabase as unknown as SupabaseClientLike);
 
     // Check admin role
     const { data: { user } } = await supabase.auth.getUser();
